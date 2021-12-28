@@ -17,7 +17,7 @@ services:
         ports:
             - "9080:9080"
         volumes:
-            - "./configs/promtail.yml:/etc/promtail/promtail.yml"
+            - "./configs/promtail:/etc/promtail"
             - "./logs:/var/promtail/logs"
         container_name: promtail
         restart: unless-stopped
