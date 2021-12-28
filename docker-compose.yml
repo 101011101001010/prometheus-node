@@ -1,0 +1,25 @@
+services:
+    node-exporter:
+        image: quay.io/prometheus/node-exporter:latest
+        volumes:
+            - "/:/host:ro,rslave"
+        container_name: node-exporter
+        network_mode: host
+        pid: host
+        restart: unless-stopped
+        command:
+            - "--path.rootfs=/host"
+            - "--collector.processes"
+            - "--collector.textfile.directory=/host/usr/lib/node-exporter/textfile"
+            
+    promtail:
+        image: grafana/promtail:latest
+        ports:
+            - "9080:9080"
+        volumes:
+            - "./configs/promtail.yml:/etc/promtail/promtail.yml"
+            - "./logs:/var/promtail/logs"
+        container_name: promtail
+        restart: unless-stopped
+        command:
+            - "-config.file=/etc/promtail/promtail.yml"
