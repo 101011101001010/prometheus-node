@@ -2,3 +2,4 @@ SHELL=/bin/sh
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
 * * * * *       root    /usr/lib/node-exporter/checks.sh >| /usr/lib/node-exporter/textfile/checks.prom || true
+* * * * *       root    /usr/lib/node-exporter/test.sh >| /usr/lib/node-exporter/textfile/test.prom || true
