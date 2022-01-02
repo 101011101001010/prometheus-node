@@ -9,10 +9,31 @@ clients:
   - url: http://192.168.1.103:3100/loki/api/v1/push
 
 scrape_configs:
-- job_name: dummylogs
-  static_configs:
-  - targets:
+  - job_name: dummylogs
+    static_configs:
+    - targets:
       - localhost
-  - labels:
-      job: dummylogs
-      __path__: "/var/promtail/logs/log.log"
+    - labels:
+        job: dummylogs
+        __path__: "C:/Dev/_Projects/log_gen/logs/log.log"
+    pipeline_stages:
+    - match:
+        selector: '{job="dummylogs"}'
+        stages:
+        - regex:
+            expression: "^(?P<timestamp>[A-Za-z]{3} \\d{2} \\d{2}:\\d{2}:\\d{2} \\d{4}): Access-(?P<status>\\S+) for user (?P<user>\\S+)@(?P<domain>\\S+) stationid (?P<mac>\\S+) from (?P<src>\\S+) to (?P<dst>\\S+) \\((?P<dst_host>\\S+)\\)(\\s*)$"
+        - labels:
+            timestamp:
+            status:
+            user:
+            domain:
+            mac:
+            src:
+            dst:
+            dst_host:
+        - timestamp:
+            source: timestamp
+            format: "Jan 02 15:04:05 2006"
+            location: Asia/Singapore
+        - drop:
+            expression: "^(\\s*)$"
