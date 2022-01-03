@@ -1,5 +1,3 @@
-# Prometheus Node
+# Prometheus / Grafana Monitoring System - Remote Host Repository
 
-Docker Compose documentation can be found [in the wiki](https://github.com/101011101001010/prometheus-node/wiki).
-
-Files for the Prometheus server can be found [here](https://github.com/101011101001010/prometheus-grafana).
+Server-side files can be found [in a separate repository](https://github.com/101011101001010/prometheus-grafana).
